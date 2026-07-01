@@ -1,0 +1,6 @@
+{
+  "name": "Chrome Dashboard",
+  "description": "A highly customizable Chrome New Tab dashboard with drag-and-drop smart widgets, transparent blurred glass theme, dynamic backgrounds, and integrated Google search with Gemini AI, Google Lens, and Google Voice search.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
