@@ -136,24 +136,29 @@ export default function WeatherWidget({ theme }: WeatherWidgetProps) {
     <div className="flex flex-col h-full justify-between p-5" id="widget-weather-root">
       {/* Header with Search and Unit Toggle */}
       <div className="flex items-center justify-between gap-2">
-        <form onSubmit={handleSearch} className="flex-1 flex items-center bg-white/5 border border-white/10 rounded-lg px-2 py-1 focus-within:border-white/30 transition-all">
+        <form onSubmit={handleSearch} className="flex-1 flex items-center bg-white/5 border border-white/10 rounded-lg px-2 py-0.5 focus-within:border-white/30 transition-all">
           <input
             type="text"
             placeholder="Search city..."
             value={cityInput}
             onChange={(e) => setCityInput(e.target.value)}
-            className="bg-transparent text-xs w-full focus:outline-none focus:ring-0 placeholder:text-white/40 font-sans"
+            className="bg-transparent text-xs w-full focus:outline-none focus:ring-0 placeholder:text-white/40 font-sans py-1"
             style={{ color: theme.textColor }}
           />
-          <button type="submit" className="p-1 text-white/60 hover:text-white">
+          <button 
+            type="submit" 
+            className="p-2 text-white/60 hover:text-white flex items-center justify-center min-w-[28px] min-h-[28px]"
+            aria-label="Search weather"
+          >
             <Search size={14} />
           </button>
         </form>
 
         <button
           onClick={() => setIsCelsius(!isCelsius)}
-          className="text-xs font-mono font-bold px-2 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/10"
+          className="text-xs font-mono font-bold px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-white/10 min-w-[32px] min-h-[28px] flex items-center justify-center"
           style={{ color: theme.textColor }}
+          aria-label="Toggle Celsius and Fahrenheit temperature units"
         >
           {isCelsius ? "°C" : "°F"}
         </button>

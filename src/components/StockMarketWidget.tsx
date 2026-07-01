@@ -56,6 +56,16 @@ const INDICES_INITIAL = [
   { symbol: "DOW 30", price: 39120.15, change: -0.15, changePrice: -58.70 }
 ];
 
+const getAccessibleBgColor = (hex: string) => {
+  if (!hex) return "#3b82f6";
+  const cleanHex = hex.trim().toLowerCase();
+  // Ensure background contrast is at least 4.5:1 with white text by darkening red/pinks to a compliant crimson red (#d3002b)
+  if (cleanHex === "#ff0234" || cleanHex === "#ef4444" || cleanHex === "#f43f5e" || cleanHex === "#f56565" || cleanHex.startsWith("#ff0") || cleanHex.startsWith("#ff1") || cleanHex.startsWith("#ff2") || cleanHex.startsWith("#ff3") || cleanHex.startsWith("#ff4")) {
+    return "#d3002b";
+  }
+  return hex;
+};
+
 export default function StockMarketWidget({ theme }: StockMarketWidgetProps) {
   const [stocks, setStocks] = useState<Stock[]>(() => {
     try {
@@ -351,10 +361,11 @@ export default function StockMarketWidget({ theme }: StockMarketWidgetProps) {
                       </div>
                       <button
                         onClick={(e) => handleRemoveFromWatchlist(stock.symbol, e)}
-                        className="p-1 hover:bg-white/10 rounded-md transition-all opacity-0 group-hover:opacity-100 hover:text-red-400"
+                        className="p-2 hover:bg-white/10 rounded-md transition-all opacity-0 group-hover:opacity-100 hover:text-red-400 min-w-[28px] min-h-[28px] flex items-center justify-center"
                         title="Remove from watchlist"
+                        aria-label={`Remove ${stock.symbol} from watchlist`}
                       >
-                        <Trash2 size={10} className="opacity-50 hover:opacity-100" />
+                        <Trash2 size={12} className="opacity-50 hover:opacity-100" />
                       </button>
                     </div>
                   </div>
@@ -398,8 +409,9 @@ export default function StockMarketWidget({ theme }: StockMarketWidgetProps) {
 
                       <button
                         onClick={() => handleSellSimulation(h.symbol)}
-                        className="ml-2 text-[8px] font-mono font-bold px-1.5 py-0.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 hover:text-rose-200 rounded border border-rose-500/10 cursor-pointer"
+                        className="ml-2 text-[9px] font-mono font-bold px-2 py-1 bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 hover:text-rose-200 rounded border border-rose-500/20 cursor-pointer min-w-[40px] min-h-[24px] flex items-center justify-center"
                         title="Sell 1 Share"
+                        aria-label={`Sell 1 share of ${h.symbol}`}
                       >
                         Sell 1
                       </button>
@@ -435,10 +447,11 @@ export default function StockMarketWidget({ theme }: StockMarketWidgetProps) {
                 setBuyTarget(selectedStock);
                 setBuyShares(10);
               }}
-              className="px-3 py-1.5 rounded-xl text-[10px] font-mono font-bold flex items-center gap-1 cursor-pointer hover:scale-105 transition-all shadow-lg text-white"
-              style={{ backgroundColor: theme.accentColor }}
+              className="px-3 py-1.5 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 cursor-pointer hover:scale-105 transition-all shadow-lg text-white"
+              style={{ backgroundColor: getAccessibleBgColor(theme.accentColor) }}
+              aria-label={`Simulate buy ${selectedStock.symbol}`}
             >
-              <PlusCircle size={11} /> Simulate Buy
+              <PlusCircle size={12} /> Simulate Buy
             </button>
           </div>
 
@@ -601,7 +614,8 @@ export default function StockMarketWidget({ theme }: StockMarketWidgetProps) {
               <button
                 onClick={handleBuySimulation}
                 className="w-full py-2.5 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-2 cursor-pointer transition-transform duration-150 hover:scale-102 text-white"
-                style={{ backgroundColor: theme.accentColor }}
+                style={{ backgroundColor: getAccessibleBgColor(theme.accentColor) }}
+                aria-label="Confirm Paper Trade Buy Order"
               >
                 Confirm Paper Trade Buy Order
               </button>
