@@ -127,6 +127,22 @@ npm run start
 
 ---
 
+## 🧩 How to Load as a Google Chrome Extension
+
+This dashboard has been configured to double as a fully compliant **Google Chrome Extension (Manifest V3)** that can override your default Chrome **New Tab Page** or run as a toolbar **Popup**.
+
+To install it in your local Google Chrome browser, follow these simple steps:
+
+1. **Build the Extension**: Run `npm run build` in your terminal to generate the compiled static files and Manifest V3 structures inside the `/dist` directory.
+2. **Open Extensions Page**: Open Google Chrome and navigate to `chrome://extensions/` (or click the jigsaw puzzle icon in the top right and select *Manage Extensions*).
+3. **Enable Developer Mode**: In the top right corner of the Extensions page, toggle the **Developer mode** switch to **ON**.
+4. **Load Unpacked Extension**: Click the **Load unpacked** button in the top left corner.
+5. **Select the Build Folder**: In the file picker, navigate to your project directory and select the **`dist/`** folder.
+
+*Congratulations! The Google Chrome New Tab Dashboard is now loaded. Every time you open a blank new tab, or click the extension icon in your menu bar, your beautiful custom glassmorphic productivity dashboard will launch instantly.*
+
+---
+
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) page for details.
